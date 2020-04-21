@@ -295,3 +295,27 @@
 ; (list-extract dillo? highway)
 
 ; eingebaut als filter
+
+; Alle Tiere einer Liste überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals (list dillo1 parrot1 dillo2 parrot2))
+              (list (run-over-animal dillo1)
+                    (run-over-animal parrot1)
+                    (run-over-animal dillo2)
+                    (run-over-animal parrot2)))
+
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (run-over-animal (first list))
+             (run-over-animals (rest list)))))))
+
+
+
+
+
+
+   
