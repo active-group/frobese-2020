@@ -19,14 +19,30 @@
        )))))
 
 (define rev
-  (lambda (list)
-    (rev* list empty)))
+  (lambda (list0)
+    
+    (define loop
+      (lambda (list result)
+        (cond
+          ((empty? list) result)
+          ((cons? list)
+           ; Aufruf von rev* hat keinen Kontext => iterativer Berechnungsprozeß
+           ; tail call
+           ; "proper tail calls": tail calls verbrauchen keinen Speicher auf dem "Stack"
+           ; endrekursiver Aufruf
+           (loop (rest list) (cons (first list) result))))))
+    
+    (rev* list0 empty)))
 
 (define rev*
   (lambda (list result)
     (cond
       ((empty? list) result)
       ((cons? list)
+       ; Aufruf von rev* hat keinen Kontext => iterativer Berechnungsprozeß
+       ; tail call
+       ; "proper tail calls": tail calls verbrauchen keinen Speicher auf dem "Stack"
+       ; endrekursiver Aufruf
        (rev* (rest list) (cons (first list) result))))))
 
 ; 4 + 3 + 2 + 1
@@ -41,7 +57,7 @@
     (cond
       ((empty? list1) list2)
       ((cons? list1)
-       (cons (first list1)
+       (cons (first list1) ; Kontext
              (my-append (rest list1) list2))))))
 
 ; Eine natürliche Zahl ist eins der folgenden:
