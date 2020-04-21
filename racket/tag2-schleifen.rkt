@@ -4,7 +4,7 @@
 ; Liste umdrehen
 (: rev ((list-of %a) -> (list-of %a)))
 
-(check-expect (rev (list 1 2 3 4))
+#;(check-expect (rev (list 1 2 3 4))
               (list 4 3 2 1))
 
 #;(define rev
@@ -32,6 +32,9 @@
 ; 4 + 3 + 2 + 1
 ; 1 + 2 + 3 + ...+ (n - 1) + n
 ; (n * (n - 1)) / 2
+
+(check-expect (my-append (list 1 2 3) (list 4 5 6))
+              (list 1 2 3 4 5 6))
 
 (define my-append
   (lambda (list1 list2)
