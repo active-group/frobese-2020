@@ -364,7 +364,8 @@
 
 (define apply-list
   (lambda (f list)
-    (cond
+    (reduce ... ... list)
+    #;(cond
       ((empty? list) empty)
       ((cons? list)
        (cons (f (first list))
@@ -453,6 +454,16 @@
       ((empty? liste) n)
       ((cons? liste) (symbol (first liste)
                              (reduce n symbol (rest liste)))))))
+
+; codifizierte Schablone!
+
+#;(define f
+    (lambda (list)
+      (cond
+        ((empty? liste) ...)
+        ((cons? liste)
+         ... (first liste)
+         ... (f (rest liste))))))
 
 
 #;(define reduce-empty-cons
