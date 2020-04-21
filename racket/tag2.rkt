@@ -63,3 +63,51 @@
     (if (empty? liste)
         (violation "Leere Liste")
         (list-mult-helper liste))))
+
+; Alle Elemente einer Liste multiplizieren
+(: list-product (list-of-integers -> integer))
+
+(check-expect (list-product liste3) 15)
+
+(define list-product
+  (lambda (liste)
+    (cond
+      ((empty? liste) 1) ; neutrales Element
+      ((cons? liste) (* (first liste)
+                        (list-product (rest liste)) ; Produkt des Rests der Liste
+                        )))))
+
+; Alle geraden Elemente aus einer Liste extrahieren
+(: list-evens (list-of-integers -> list-of-integers))
+
+(check-expect (list-evens (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
+              (cons 2 (cons 6 empty)))
+
+
+(define list-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (list-evens (rest list)))
+       (if (even? f)
+           (cons f r)
+           r)))))
+
+; Alle ungeraden Elemente aus einer Liste extrahieren
+(: list-odds (list-of-integers -> list-of-integers))
+
+(check-expect (list-odds (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
+              (cons 1 (cons 5 (cons 9 empty))))
+
+(define list-odds
+  (lambda (list)
+    (cond
+      ((empty? list) list)
+      ((cons? list)
+       (define f (first list))
+       (define r (list-odds (rest list)))
+       (if (odd? f)
+           (cons f r)
+           r)))))
