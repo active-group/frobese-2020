@@ -68,6 +68,8 @@
     (make-parrot (parrot-weight parrot) "")))
 
 ;;; nicht getestet!!!
+(: parrot-alive? (parrot -> boolean))
+
 (define parrot-alive?
   (lambda (parrot)
     (not (string=? "" (parrot-sentence parrot)))))
@@ -313,7 +315,32 @@
        (cons (run-over-animal (first list))
              (run-over-animals (rest list)))))))
 
+(: parrots-alive? ((list-of parrot) -> (list-of boolean)))
 
+(check-expect (parrots-alive? (list parrot1 parrot2 (run-over-parrot parrot1)))
+              (list #t #t #f))
+
+(define parrots-alive?
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (parrot-alive? (first list))
+             (parrots-alive? (rest list)))))))
+                              
+
+(: apply-list ((%a -> %b) (list-of %a) -> (list-of %b)))
+   
+(check-expect (apply-list run-over-animal highway)
+              (run-over-animals highway))
+
+(define apply-list
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (cons (f (first list))
+             (apply-list f (rest list)))))))
 
 
 
