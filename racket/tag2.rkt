@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname tag2) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
+#reader(lib "vanilla-reader.rkt" "deinprogramm" "sdp")((modname tag2) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Ein Gürteltier hat folgende Eigenschaften
 ; - lebendig oder tot
 ; - Gewicht in g
@@ -115,7 +115,7 @@
 
 
 ; Eine leere Liste besteht aus... ? nix
-(define-record-functions empty-list
+#;(define-record-functions empty-list
   make-empty-list
   empty?)
 
@@ -123,8 +123,8 @@
 ; - einer Zahl ("Kopf" der Liste)
 ; - eine weitere Liste der restlichen Zahlen
 ; (: cons-of-integers signature)
-(: cons-of (signature -> signature))
-(define-record-functions (cons-of element) ; Abstraktion über element
+#;(: cons-of (signature -> signature))
+#;(define-record-functions (cons-of element) ; Abstraktion über element
   ; (lambda (element) ...)
   cons
   cons?
@@ -147,15 +147,15 @@
 
 
 ; Signaturvariable: fängt mit % an, kein Lambda notwendig
-(: cons (%element (list-of %element) -> (cons-of %element)))
+#;(: cons (%element (list-of %element) -> (cons-of %element)))
 
 ; cons -> constitute = construct / constitute (?)
 
 ; Eine Liste von Zahlen ist eins der folgenden
 ; - eine leere Liste
 ; - eine nicht-leere Liste (von Zahlen)
-(: list-of (signature -> signature))
-(define list-of
+#;(: list-of (signature -> signature))
+#;(define list-of
   (lambda (element)
     (signature (mixed empty-list
                       (cons-of element)))))
@@ -163,7 +163,7 @@
 (define list-of-integers
   (signature (list-of integer)))
 
-(define empty (make-empty-list))
+#;(define empty (make-empty-list))
 
 (define liste1 (cons 3 empty))
 (define liste2 (cons 1 (cons 5 empty)))
@@ -281,3 +281,17 @@
        (if (p? f)
            (cons f r)
            r)))))
+
+(: dillo-list1 (list-of dillo))
+(define dillo-list1 (list dillo1 dillo2))
+
+(: dillo-alive? (dillo -> boolean))
+; (list-extract dillo-alive? dillo-list1)
+
+(define highway (list dillo1 parrot1 dillo2 parrot2))
+
+(: dillo? (any -> boolean))
+
+; (list-extract dillo? highway)
+
+; eingebaut als filter
