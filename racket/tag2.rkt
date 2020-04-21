@@ -364,7 +364,10 @@
 
 (define apply-list
   (lambda (f list)
-    (reduce ... ... list)
+    (reduce empty (lambda (first-list result-recursive)
+                    (cons (f first-list)
+                          result-recursive))
+            list)
     #;(cond
       ((empty? list) empty)
       ((cons? list)
@@ -472,4 +475,5 @@
       ((empty? liste) empty)
       ((cons? liste) (cons (first liste)
                            (reduce-empty-cons (rest liste)))))))
+
 
