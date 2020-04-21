@@ -112,7 +112,9 @@
            (cons f r)
            r)))))
 
-(: list-extract (... ... -> ...))
+; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium erfüllen
+; Kriterium repräsentiert als *Prädikat*
+(: list-extract ((integer -> boolean) list-of-integers -> list-of-integers))
 
 (check-expect (list-extract even? (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
               (cons 2 (cons 6 empty)))
