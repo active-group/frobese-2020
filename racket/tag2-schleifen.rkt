@@ -56,13 +56,29 @@
 (check-expect (my-append (list 1 2 3) (list 4 5 6))
               (list 1 2 3 4 5 6))
 
-(define my-append
+#;(define my-append
   (lambda (list1 list2)
     (cond
       ((empty? list1) list2)
       ((cons? list1)
        (cons (first list1) ; Kontext
              (my-append (rest list1) list2))))))
+
+(define my-append
+  (lambda (list1-init list2)
+
+    (define loop
+      ; result enthält vorn an list2 drangehängt
+      ; die gesehenen Elemente von list1-init vor list1
+      (lambda (list1 result)
+        (cond
+          ((empty? list1) result)
+          ((cons? list1)
+           (loop (rest list1)
+                 (cons (first list1) result))))))
+
+    (loop (rev list1-init) list2)))
+
 
 ; Eine natürliche Zahl ist eins der folgenden:
 ; - 0
@@ -80,3 +96,5 @@
       ((zero? n) empty)
       ((positive? n)
        (cons element (repeat (- n 1) element))))))
+
+
