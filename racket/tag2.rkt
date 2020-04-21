@@ -111,3 +111,21 @@
        (if (odd? f)
            (cons f r)
            r)))))
+
+(: list-extract (... ... -> ...))
+
+(check-expect (list-extract even? (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
+              (cons 2 (cons 6 empty)))
+(check-expect (list-extract odd? (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
+              (cons 1 (cons 5 (cons 9 empty))))
+
+(define list-extract
+  (lambda (p? list)
+    (cond
+      ((empty? list) list)
+      ((cons? list)
+       (define f (first list))
+       (define r (list-extract p? (rest list)))
+       (if (p? f)
+           (cons f r)
+           r)))))
