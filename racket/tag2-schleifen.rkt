@@ -12,11 +12,19 @@
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (append
+       (my-append
         (rev ; 4 3 2
          (rest list)) ; 2 3 4
         (cons (first list) empty) ; 1
        )))))
+
+(define my-append
+  (lambda (list1 list2)
+    (cond
+      ((empty? list1) list2)
+      ((cons? list1)
+       (cons (first list1)
+             (my-append (rest list1) list2))))))
 
 ; Eine natürliche Zahl ist eins der folgenden:
 ; - 0
