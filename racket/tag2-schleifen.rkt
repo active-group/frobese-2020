@@ -64,6 +64,13 @@
        (cons (first list1) ; Kontext
              (my-append (rest list1) list2))))))
 
+(check-property
+ (for-all ((a (list-of natural))
+           (b (list-of natural))
+           (c (list-of natural)))
+   (expect (my-append (my-append a b) c)
+           (my-append a (my-append b c)))))
+
 (define my-append
   (lambda (list1-init list2)
 
@@ -78,6 +85,7 @@
                  (cons (first list1) result))))))
 
     (loop (rev list1-init) list2)))
+
 
 
 ; Eine natürliche Zahl ist eins der folgenden:
@@ -98,3 +106,43 @@
        (cons element (repeat (- n 1) element))))))
 
 
+; (Lineare) Algebra
+; Gruppen
+; Eine Gruppe ist eine Menge M mit zwei Operationen
+; (: o (M M -> M))
+; (: inv (M -> M))
+; und einem neutralen Element n
+; (o m (inv m)) = n
+
+; Halbgruppe
+; Assoziativgesetz:
+; (o (o a b) c) = (o a (o b c))
+
+; Halbgruppe + neutrales Element: Monoid
+
+; neutrales Element n bezüglich der Addition der reellen Zahlen:
+; x + n = n + x = x
+; (a + b) + c = a + (b + c)
+; neutrales Element n bezüglich der Multiplikation der reellen Zahlen:
+; x * n = n * x = x
+
+
+(check-property
+ (for-all ((x natural))
+   (and (= (+ x 0) x)
+        (= (+ 0 x) x))))
+
+
+(check-property
+ (for-all ((a rational)
+           (b rational)
+           (c rational))
+   (= (+ (+ a b) c)
+      (+ a (+ b c)))))
+
+(define a #i-4.0)
+(define b #i0.6666666666666666)
+(define c #i0.6666666666666667)
+
+(+ (+ a b) c)
+(+ a (+ b c))
