@@ -9,6 +9,8 @@
 ; Eine nicht-leere Liste besteht aus
 ; - einer Zahl ("Kopf" der Liste)
 ; - eine weitere Liste der restlichen Zahlen
+; (: cons-of-integers signature)
+(: cons-of (signature -> signature))
 (define-record-functions (cons-of element) ; Abstraktion über element
   ; (lambda (element) ...)
   cons
@@ -16,13 +18,22 @@
   (first element)
   (rest (list-of element)))
 
+; Signaturvariable: fängt mit % an, kein Lambda notwendig
+(: cons (%element (list-of %element) -> (cons-of %element)))
+
 ; cons -> constitute = construct / constitute (?)
 
 ; Eine Liste von Zahlen ist eins der folgenden
 ; - eine leere Liste
 ; - eine nicht-leere Liste (von Zahlen)
+(: list-of (signature -> signature))
+(define list-of
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-of element)))))
+
 (define list-of-integers
-  (signature (mixed empty-list cons-of-integers)))
+  (signature (list-of integer)))
 
 (define empty (make-empty-list))
 
@@ -31,7 +42,7 @@
 (define liste3 (cons 3 liste2))
 
 ; Addiere alle Zahlen der Liste auf!
-(: list-sum (list-of-integers -> integer))
+(: list-sum ((list-of integer) -> integer))
 (check-expect (list-sum liste1) 3)
 (check-expect (list-sum liste3) 9)
 (check-expect (list-sum empty) 0)
@@ -113,9 +124,19 @@
            (cons f r)
            r)))))
 
+; Java
+; public interface Stream<T> <- Lambda
+; Stream<T> 	filter(Predicate<? super T> predicate)
+
 ; Alle Elemente einer Liste extrahieren, die ein bestimmtes Kriterium erfüllen
 ; Kriterium repräsentiert als *Prädikat*
-(: list-extract ((integer -> boolean) list-of-integers -> list-of-integers))
+(: list-extract ((%element -> boolean) (list-of %element) -> (list-of %element)))
+
+(: blist1 (list-of boolean))
+(define blist1 (cons #t (cons #f empty)))
+
+(: slist1 (list-of string))
+(define slist1 (cons "foo" (cons "bar" empty)))
 
 (check-expect (list-extract even? (cons 1 (cons 2 (cons 5 (cons 6 (cons 9 empty))))))
               (cons 2 (cons 6 empty)))
