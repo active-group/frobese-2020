@@ -7,7 +7,7 @@
 (check-expect (rev (list 1 2 3 4))
               (list 4 3 2 1))
 
-(define rev
+#;(define rev
   (lambda (list)
     (cond
       ((empty? list) empty)
@@ -17,6 +17,21 @@
          (rest list)) ; 2 3 4
         (cons (first list) empty) ; 1
        )))))
+
+(define rev
+  (lambda (list)
+    (rev* list empty)))
+
+(define rev*
+  (lambda (list result)
+    (cond
+      ((empty? list) result)
+      ((cons? list)
+       (rev* (rest list) (cons (first list) result))))))
+
+; 4 + 3 + 2 + 1
+; 1 + 2 + 3 + ...+ (n - 1) + n
+; (n * (n - 1)) / 2
 
 (define my-append
   (lambda (list1 list2)
