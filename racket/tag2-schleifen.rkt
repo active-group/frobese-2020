@@ -10,7 +10,27 @@
 (define rev
   (lambda (list)
     (cond
-      ((empty? list) ...)
+      ((empty? list) empty)
       ((cons? list)
-       (first list)
-       (rev (rest list))))))
+       (append
+        (rev ; 4 3 2
+         (rest list)) ; 2 3 4
+        (cons (first list) empty) ; 1
+       )))))
+
+; Eine natürliche Zahl ist eins der folgenden:
+; - 0
+; - der Nachfolger einer natürlichen Zahl ("+1")
+
+(: repeat (natural %element -> (list-of %element)))
+
+(check-expect (repeat 10 "foo")
+              (list "foo" "foo" "foo" "foo" "foo"
+                     "foo" "foo" "foo" "foo" "foo"))
+
+(define repeat
+  (lambda (n element)
+    (cond
+      ((zero? n) empty)
+      ((positive? n)
+       (cons element (repeat (- n 1) element))))))
