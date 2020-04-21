@@ -9,11 +9,12 @@
 ; Eine nicht-leere Liste besteht aus
 ; - einer Zahl ("Kopf" der Liste)
 ; - eine weitere Liste der restlichen Zahlen
-(define-record-functions cons-of-integers
+(define-record-functions (cons-of element) ; Abstraktion über element
+  ; (lambda (element) ...)
   cons
   cons?
-  (first integer)
-  (rest list-of-integers))
+  (first element)
+  (rest (list-of element)))
 
 ; cons -> constitute = construct / constitute (?)
 
