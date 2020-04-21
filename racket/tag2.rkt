@@ -371,8 +371,7 @@
              (apply-list f (rest list)))))))
 
 
-(check-expect (apply-list (lambda (dillo)
-                            (feed-dillo 5000 dillo))
+(check-expect (apply-list (make-feed-dillo 5000)
                           (list dillo1 dillo2))
               (list (feed-dillo 5000 dillo1)
                     (feed-dillo 5000 dillo2)))
@@ -382,3 +381,53 @@
                           (list dillo1 dillo2))
               (list (feed-dillo 4000 dillo1)
                     (feed-dillo 4000 dillo2)))
+
+#;(define make-feed-dillo
+  (lambda (amount)
+    (lambda (dillo)
+      (feed-dillo amount dillo))))
+
+(: make-feed-dillo (natural -> (dillo -> dillo)))
+
+#;(define make-feed-dillo
+  (lambda (amount)
+    (lambda (dillo)
+      (feed-dillo amount dillo))))
+
+
+
+(check-expect (apply-list (lambda (n)
+                            (+ 7 n))
+                          (list 1 2 3 4))
+              (list 8 9 10 11))
+(check-expect (apply-list (make-+ 7)
+                          (list 1 2 3 4))
+              (list 8 9 10 11))
+
+(: make-+ (number -> (number -> number)))
+
+(define make-+
+  (lambda (m)
+    (lambda (n)
+      (+ m n))))
+
+
+; (: a %a)
+; (: b %b)
+; Haskell Curry
+; Moses Schönfinkel
+(: curry ((%a %b -> %c) -> (%a -> (%b -> %c))))
+   
+(define curry
+  (lambda (f)
+    (lambda (a)
+      (lambda (b)
+        (f a b)))))
+
+(define make-feed-dillo (curry feed-dillo))
+
+(define c+ (curry +))
+
+
+
+
