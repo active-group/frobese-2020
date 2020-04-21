@@ -428,6 +428,18 @@
 
 (define c+ (curry +))
 
+(: uncurry ((%a -> (%b -> %c)) -> (%a %b -> %c)))
+
+(check-expect ((uncurry c+) 23 42) 65)
+
+(define uncurry
+  (lambda (f) ; (: f (%a -> (%b -> %c)))
+    (lambda (a b)
+      ((f a) ; (%b -> %c)
+       b))))
+      
+
+  
 
 
 
