@@ -115,6 +115,21 @@
       ((dillo? animal)  (dillo-alive? animal))
       ((parrot? animal) (parrot-alive? animal)))))
 
+; Gürteltier füttern
+(: feed-dillo (natural dillo -> dillo))
+
+(check-expect (feed-dillo 5000 dillo1)
+              (make-dillo #t 25000))
+(check-expect (feed-dillo 5000 dillo2)
+              dillo2)
+
+(define feed-dillo
+  (lambda (amount dillo)
+    (make-dillo (dillo-alive? dillo)
+                (if (dillo-alive? dillo)
+                    (+ (dillo-weight dillo)
+                       amount)
+                    (dillo-weight dillo)))))
 
 ; Eine leere Liste besteht aus... ? nix
 #;(define-record-functions empty-list
@@ -328,11 +343,24 @@
        (cons (parrot-alive? (first list))
              (parrots-alive? (rest list)))))))
                               
-
+; eingebaut als map
+; Java:
+; Stream<T>
+; <R> Stream<R> 	map(Function<? super T,? extends R> mapper)
+; <R> Stream<R>         map(Function<T, R> mapper)
 (: apply-list ((%a -> %b) (list-of %a) -> (list-of %b)))
    
 (check-expect (apply-list run-over-animal highway)
               (run-over-animals highway))
+
+(check-expect (apply-list (lambda (n)
+                            (+ n 1))
+                          (list 1 2 3 4))
+              (list 2 3 4 5))
+
+(define inc
+  (lambda (n)
+    (+ n 1)))
 
 (define apply-list
   (lambda (f list)
@@ -343,6 +371,14 @@
              (apply-list f (rest list)))))))
 
 
+(check-expect (apply-list (lambda (dillo)
+                            (feed-dillo 5000 dillo))
+                          (list dillo1 dillo2))
+              (list (feed-dillo 5000 dillo1)
+                    (feed-dillo 5000 dillo2)))
 
-
-   
+(check-expect (apply-list (lambda (dillo)
+                            (feed-dillo 4000 dillo))
+                          (list dillo1 dillo2))
+              (list (feed-dillo 4000 dillo1)
+                    (feed-dillo 4000 dillo2)))
