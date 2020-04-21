@@ -437,9 +437,28 @@
     (lambda (a b)
       ((f a) ; (%b -> %c)
        b))))
-      
-
-  
 
 
+(: reduce (%a (%element %a -> %a) (list-of %element) -> %a))
+
+; fold
+(check-expect (reduce empty cons (list 1 2 3 4 5))
+              #;(list empty empty empty empty empty)
+              (list 1 2 3 4 5)
+              )
+
+(define reduce
+  (lambda (n symbol liste)
+    (cond
+      ((empty? liste) n)
+      ((cons? liste) (symbol (first liste)
+                             (reduce n symbol (rest liste)))))))
+
+
+#;(define reduce-empty-cons
+  (lambda (liste)
+    (cond
+      ((empty? liste) empty)
+      ((cons? liste) (cons (first liste)
+                           (reduce-empty-cons (rest liste)))))))
 
