@@ -1,5 +1,5 @@
 defmodule AnimalTest do
   use ExUnit.Case
-  doctest Intro
+  doctest Animal
 
 end

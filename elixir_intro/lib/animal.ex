@@ -1,3 +1,2 @@
 defmodule Animal do
-
 end
