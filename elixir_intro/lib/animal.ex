@@ -48,7 +48,7 @@ defmodule Animal do
       iex> Animal.Parrot.run_over(Animal.Parrot.p1)
       %Animal.Parrot{sentence: "", weight: 2}
       iex> Animal.Parrot.run_over(Animal.Parrot.p2)
-      Animal.Parrot.make("", 2)
+      Animal.Parrot.make("", 3)
     """
     @spec run_over(Parrot.t()) :: Parrot.t()
     def run_over(parrot) do
