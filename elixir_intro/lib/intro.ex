@@ -61,11 +61,11 @@ defmodule Intro do
   @doc """
   Aggregatzustand von Wasser berechnen
 
-     iex> state(10)
+     iex> Intro.water_state(10)
      Liquid
-     iex> state(-1)
+     iex> Intro.water_state(-1)
      Solid
-     iex> state(100)
+     iex> Intro.water_state(100)
      Gas
   """
 
