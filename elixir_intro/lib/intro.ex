@@ -73,8 +73,8 @@ defmodule Intro do
   def water_state(temp) do
     cond do
       temp < 0 -> Solid
-      temp < 100 -> Liquid
-      true -> Gas
+      (temp >= 0) && (temp < 100) -> Liquid
+      temp >= 100 -> Gas
     end
   end
 
