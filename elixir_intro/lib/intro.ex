@@ -105,6 +105,8 @@ defmodule Intro do
 
      iex> Intro.list_filter(&Intro.positive?/1, [1, -1, 2, 15, -13])
      [1, 2, 15]
+     iex> Intro.list_filter(fn (n) -> n > 0 end, [1, -1, 2, 15, -13])
+     [1, 2, 15]
   """
   @spec list_filter((a -> boolean()), list(a)):: list(a) when a: var
   def list_filter(_p?, []) do
