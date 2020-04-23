@@ -34,6 +34,25 @@ defmodule Animal do
     def run_over(dillo) do
       %{dillo | alive?: false} # Kopie von dillo, nur ist alive? dann false
     end
+
+    @doc """
+    Gürteltier füttern
+
+      # iex> Animal.Dillo.feed(Animal.Dillo.d1, 1)
+      # Animal.Dillo.make(true, 11)
+      # iex> Animal.Dillo.feed()
+    """
+
+    def feed(dillo, amount) do
+      if dillo.alive? do
+        {:ok, %{dillo | weight: dillo.weight + amount}}
+      else
+        :dillo_dead
+      end
+    end
+
+
+
   end
 
   defmodule Parrot do
