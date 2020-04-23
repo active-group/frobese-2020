@@ -36,7 +36,7 @@ defmodule Intro do
     iex> Intro.cute?(TasmanianDevil)
     false
   """
-  @spec cute?(Cat | Dog | TasmanianDevil):: boolean
+  # @spec cute?(Cat | Dog | TasmanianDevil):: boolean
   @spec cute?(pet):: boolean
   def cute?(pet) do
     cond do
