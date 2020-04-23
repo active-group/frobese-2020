@@ -99,7 +99,7 @@ defmodule Intro do
   @doc """
   Elemente aus einer Liste herausextrahieren
   """
-  @spec list_filter(a -> b, list(a)):: list(b), var: a, var: b
+  @spec list_filter((a -> b), list(a)):: list(b), var: a, var: b
   def list_filter(p?, []) do
 
   end
