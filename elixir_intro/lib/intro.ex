@@ -105,10 +105,11 @@ defmodule Intro do
   end
   def list_filter(p?, [first | rest]) do
     # p?.(first) # . um Funktionen aufzurufen, die Wert eines Ausdrucks sind
+    r = list_filter(p?, rest)
     if p?.(first) do
-      [first | list_filter(p?, rest)]
+      [first | r]
     else
-      list_filter(p?, rest)
+      r
     end
   end
 
