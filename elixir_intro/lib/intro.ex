@@ -123,11 +123,19 @@ defmodule Intro do
   end
 
   @doc """
-     iex> Intro.list_map(fn dillo -> dillo.alive? end, )
+     iex> Intro.list_map(fn dillo -> dillo.alive? end, [Animal.dillo.d1, Animal.Dillo.d2])
+     [Animal.Dillo.d1]
   """
 
   @spec list_map((a -> b), list(a)) :: list(b) when a: var, b: var
 
+  def list_map(f, []) do
+
+  end
+  def list_map(f, [first | rest]) do
+    f(first)
+    # list_map(f, rest)
+  end
 
 
   # String.t() für Strings
