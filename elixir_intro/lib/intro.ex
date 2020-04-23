@@ -133,7 +133,7 @@ defmodule Intro do
 
   end
   def list_map(f, [first | rest]) do
-    f(first)
+    f.(first)
     # list_map(f, rest)
   end
 
