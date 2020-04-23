@@ -52,7 +52,7 @@ defmodule Animal do
     """
     @spec run_over(Parrot.t()) :: Parrot.t()
     def run_over(parrot) do
-      nil
+      Parrot.make("", parrot.weight)
     end
 
 
