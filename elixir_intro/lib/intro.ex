@@ -95,4 +95,27 @@ defmodule Intro do
   def list_sum([first | rest]) do
     first + list_sum(rest)
   end
+
+  @doc """
+  Elemente aus einer Liste herausextrahieren
+  """
+  @spec list_filter(a -> b, list(a)):: list(b), var: a, var: b
+  def list_filter(p?, []) do
+
+  end
+  def list_filter(p?, [first | rest]) do
+
+  end
+
+  # String.t() für Strings
+  # boolean()  # Erlang
+  # integer()  # Erlang
+  # in Erlang sind Strings Listen aus Unicode-Scalar-Values
+  # string() gibt's deshalb nicht
+  # String.t() ist UTF-8
+  # Erlang-Strings heißen in Elixir "charlist"
+  # Elixir-Strings heißen in Erlang "binary"
+  # Hin- und Her-Konvertieren mit String.to_charlist, to_string
+
+
 end
