@@ -122,6 +122,8 @@ defmodule Intro do
     end
   end
 
+  @spec list_map((a -> b), list(a)) :: list(b) when a: var, b: var
+
   # String.t() für Strings
   # boolean()  # Erlang
   # integer()  # Erlang
