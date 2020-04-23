@@ -123,7 +123,7 @@ defmodule Intro do
   end
 
   @doc """
-     iex> Intro.list_map(fn dillo -> dillo.alive? end, [Animal.dillo.d1, Animal.Dillo.d2])
+     iex> Intro.list_map(fn dillo -> dillo.alive? end, [Animal.Dillo.d1, Animal.Dillo.d2])
      [Animal.Dillo.d1]
   """
 
