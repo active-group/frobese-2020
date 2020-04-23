@@ -21,4 +21,28 @@ defmodule Intro do
   def hello() do
     :world
   end
+
+  # | : "oder"
+  # Atom: "genau das Atom"
+  @type pet :: Cat | Dog | TasmanianDevil
+
+  @doc """
+  Ist ein Haustier niedlich?
+
+    iex> Intro.cute?(Cat)
+    true
+    iex> Intro.cute?(Dog)
+    true
+    iex> Intro.cute?(TasmanianDevil)
+    false
+  """
+  @spec cute?(Cat | Dog | TasmanianDevil):: boolean
+  @spec cute?(pet):: boolean
+  def cute?(pet) do
+    cond do
+      pet == Cat -> true
+      pet == Dog -> true
+      pet == TasmanianDevil -> false
+    end
+  end
 end
