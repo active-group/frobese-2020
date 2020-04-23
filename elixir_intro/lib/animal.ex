@@ -39,6 +39,7 @@ defmodule Animal do
   defmodule Parrot do
     use QuickStruct, [sentence: String.t(), weight: number()]
 
-    def p1, do: Parrot.make()
+    def p1, do: Parrot.make("Hello!", 2)
+    def p2, do: Parrot.make("Goodbye!", 3)
   end
 end
