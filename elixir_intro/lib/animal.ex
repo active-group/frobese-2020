@@ -11,7 +11,22 @@ defmodule Animal do
     use QuickStruct, [alive?: boolean(), weight: number()]
 
     def d1 do # Gürteltier, am Leben, 10kg
-      Dillo.make(true, 10)
+      Animal.Dillo.make(true, 10)
+    end
+    def d2, do: Dillo.make(false, 12) # tot, 12kg
+
+    @doc """
+    Gürteltier überfahren
+
+      iex> Animal.Dillo.run_over(Animal.Dillo.d1)
+      %Animal.Dillo{alive?: false, weight: 10}
+      iex> Animal.Dillo.run_over(Animal.Dillo.d2)
+      d2
+    """
+
+    @spec run_over(Animal.Dillo.t()) :: Animal.Dillo.t()
+    def run_over(dillo) do
+      Dillo.make(false, dillo.weight)
     end
   end
 end
