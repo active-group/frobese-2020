@@ -28,8 +28,11 @@ defmodule Animal do
     # def run_over(dillo) do
     #   Dillo.make(false, dillo.weight)
     # end
-    def run_over(%Dillo{alive?: _a, weight: w}) do
-      Dillo.make(false, w)
+    # def run_over(%Dillo{alive?: _a, weight: w}) do
+    #   Dillo.make(false, w)
+    # end
+    def run_over(dillo) do
+      %{dillo | alive?: false} # Kopie von dillo, nur ist alive? dann false
     end
 
   end
