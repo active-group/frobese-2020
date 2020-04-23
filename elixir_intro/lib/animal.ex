@@ -54,7 +54,23 @@ defmodule Animal do
     def run_over(parrot) do
       Parrot.make("", parrot.weight)
     end
+  end
 
+  @type t :: Dillo.t() | Parrot.t()
 
+  @doc """
+  Tier überfahren
+
+    iex> Animal.run_over(Animal.Dillo.d1)
+    Animal.Dillo.run_over(Animal.Dillo.d1)
+    iex> Animal.run_over(Animal.Parrot.p1)
+    Animal.Parrot.run_over(Animal.Parrot.p1)
+  """
+  @spec run_over(Animal.t()) :: Animal.t()
+  def run_over(dillo = %Dillo{alive?: a, weight: w}) do # Dillo
+    Dillo.run_over(dillo)
+  end
+  def run_over(parrot = %Parrot{sentence: s, weight: w}) do # Parrot
+    Parrot.run_over(parrot)
   end
 end
