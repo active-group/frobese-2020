@@ -38,9 +38,12 @@ defmodule Animal do
     @doc """
     Gürteltier füttern
 
-      # iex> Animal.Dillo.feed(Animal.Dillo.d1, 1)
-      # Animal.Dillo.make(true, 11)
-      # iex> Animal.Dillo.feed()
+      iex> {:ok, new_dillo1} = Animal.Dillo.feed(Animal.Dillo.d1, 1)
+      iex> new_dillo1
+      Animal.Dillo.make(true, 11)
+      iex> {:ok, new_dillo2} = Animal.Dillo.feed(Animal.Dillo.d2, 1)
+      iex> new_dillo2
+      Animal.Dillo.make(false, 13)
     """
 
     def feed(dillo, amount) do
