@@ -79,7 +79,7 @@ defmodule Intro do
   end
 
   def foo() do
-    water_state(:number)
+    water_state(-100)
   end
 
 
