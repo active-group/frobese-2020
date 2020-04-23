@@ -8,8 +8,5 @@ defmodule Animal do
     def make(alive?, weight) do
       %Dillo{alive?: alive?, weight: weight}
     end
-    def foo() do
-      make(10, "foo")
-    end
   end
 end
