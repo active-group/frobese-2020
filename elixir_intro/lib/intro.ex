@@ -96,8 +96,15 @@ defmodule Intro do
     first + list_sum(rest)
   end
 
+  def positive?(n) do
+    n > 0
+  end
+
   @doc """
   Elemente aus einer Liste herausextrahieren
+
+     iex> Intro.list_filter(&positive?/1, [1, -1, 2, 15, -13])
+     [1, 2, 15]
   """
   @spec list_filter((a -> boolean()), list(a)):: list(a) when a: var
   def list_filter(_p?, []) do
