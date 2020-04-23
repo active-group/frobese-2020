@@ -38,11 +38,21 @@ defmodule Intro do
   """
   # @spec cute?(Cat | Dog | TasmanianDevil):: boolean
   @spec cute?(pet):: boolean
-  def cute?(pet) do
-    cond do
-      pet == Cat -> true
-      pet == Dog -> true
-      pet == TasmanianDevil -> false
-    end
+#  def cute?(pet) do
+#    cond do
+#      pet == Cat -> true
+#      pet == Dog -> true
+#      pet == TasmanianDevil -> false
+#    end
+#  end
+
+  def cute?(Cat) do
+    true
+  end
+  def cute?(Dog) do
+    true
+  end
+  def cute?(TasmanianDevil) do
+    false
   end
 end
