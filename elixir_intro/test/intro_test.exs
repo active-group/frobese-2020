@@ -11,4 +11,8 @@ defmodule IntroTest do
     assert Intro.cute?(Cat)
     assert Intro.cute?(TasmanianDevil) == false
   end
+
+  test "water_state operates correctly" do
+    assert Intro.water_state(-10) == Solid
+  end
 end
