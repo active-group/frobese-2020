@@ -69,7 +69,7 @@ defmodule Intro do
      Gas
   """
   @type state :: Liquid | Solid | Gas
-  @spec water_state(float())   :: state()
+  @spec water_state(float() | integer())   :: state()
   def water_state(temp) do
     cond do
       temp < 0 -> Solid
