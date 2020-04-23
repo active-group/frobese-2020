@@ -45,7 +45,6 @@ defmodule Intro do
 #      pet == TasmanianDevil -> false
 #    end
 #  end
-
   def cute?(5) do
     false
   end
@@ -58,4 +57,18 @@ defmodule Intro do
   def cute?(TasmanianDevil) do
     false
   end
+
+  @doc """
+  Aggregatzustand von Wasser berechnen
+
+     iex> state(10)
+     Liquid
+     iex> state(-1)
+     Solid
+     iex> state(100)
+     Gas
+  """
+
+
+
 end
