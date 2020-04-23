@@ -103,7 +103,7 @@ defmodule Intro do
   @doc """
   Elemente aus einer Liste herausextrahieren
 
-     iex> Intro.list_filter(&positive?/1, [1, -1, 2, 15, -13])
+     iex> Intro.list_filter(&Intro.positive?/1, [1, -1, 2, 15, -13])
      [1, 2, 15]
   """
   @spec list_filter((a -> boolean()), list(a)):: list(a) when a: var
