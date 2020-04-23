@@ -101,10 +101,11 @@ defmodule Intro do
   """
   @spec list_filter((a -> b), list(a)):: list(b) when a: var, b: var
   def list_filter(p?, []) do
-
+    []
   end
   def list_filter(p?, [first | rest]) do
-
+    first
+    list_filter(p?, rest)
   end
 
   # String.t() für Strings
