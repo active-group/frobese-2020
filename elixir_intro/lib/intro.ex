@@ -122,7 +122,13 @@ defmodule Intro do
     end
   end
 
+  @doc """
+     iex> Intro.list_map(fn dillo -> dillo.alive? end, )
+  """
+
   @spec list_map((a -> b), list(a)) :: list(b) when a: var, b: var
+
+
 
   # String.t() für Strings
   # boolean()  # Erlang
