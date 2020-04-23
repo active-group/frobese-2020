@@ -67,7 +67,7 @@ defmodule Animal do
     Animal.Parrot.run_over(Animal.Parrot.p1)
   """
   @spec run_over(Animal.t()) :: Animal.t()
-  def run_over(dillo = %Dillo{alive?: a, weight: w}) do # Dillo
+  def run_over(dillo = %Dillo{}) do # Dillo
     Dillo.run_over(dillo)
   end
   def run_over(parrot = %Parrot{sentence: s, weight: w}) do # Parrot
