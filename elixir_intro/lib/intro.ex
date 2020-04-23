@@ -124,7 +124,7 @@ defmodule Intro do
 
   @doc """
      iex> Intro.list_map(&Animal.Dillo.run_over/1, [Animal.Dillo.d1, Animal.Dillo.d2])
-     [Animal.Dillo.run_over(Animal.Dillo.d1), d2]
+     [Animal.Dillo.run_over(Animal.Dillo.d1), Animal.Dillo.d2]
   """
 
   @spec list_map((a -> b), list(a)) :: list(b) when a: var, b: var
