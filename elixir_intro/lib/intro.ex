@@ -82,5 +82,17 @@ defmodule Intro do
     water_state(-100.5)
   end
 
+  @doc """
+  Elemente einer Liste summieren
 
+    iex> Intro.list_sum([1, 2, 3])
+    6
+  """
+  @spec list_sum(list(number())) :: number()
+  def list_sum([]) do
+    0
+  end
+  def list_sum([first | rest]) do
+    first + list_sum(rest)
+  end
 end
