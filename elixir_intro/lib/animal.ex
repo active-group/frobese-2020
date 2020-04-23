@@ -70,7 +70,7 @@ defmodule Animal do
   def run_over(dillo = %Dillo{}) do # Dillo
     Dillo.run_over(dillo)
   end
-  def run_over(parrot = %Parrot{sentence: s, weight: w}) do # Parrot
+  def run_over(parrot = %Parrot{sentence: _s, weight: _w}) do # Parrot
     Parrot.run_over(parrot)
   end
 end
