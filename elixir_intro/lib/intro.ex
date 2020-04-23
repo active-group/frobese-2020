@@ -104,8 +104,12 @@ defmodule Intro do
     []
   end
   def list_filter(p?, [first | rest]) do
-    first
-    list_filter(p?, rest)
+    # p?.(first) # . um Funktionen aufzurufen, die Wert eines Ausdrucks sind
+    if p?.(first) do
+      [first | list_filter(p?, rest)]
+    else
+      list_filter(p?, rest)
+    end
   end
 
   # String.t() für Strings
