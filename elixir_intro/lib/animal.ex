@@ -34,6 +34,5 @@ defmodule Animal do
     def run_over(dillo) do
       %{dillo | alive?: false} # Kopie von dillo, nur ist alive? dann false
     end
-
   end
 end
