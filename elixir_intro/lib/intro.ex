@@ -46,7 +46,10 @@ defmodule Intro do
 #    end
 #  end
 
-  def cute?(Cat) do
+  def cute?(5) do
+    false
+  end
+  def cute?(Cat) do # Pattern
     true
   end
   def cute?(Dog) do
