@@ -18,7 +18,7 @@ defmodule Intro do
       :world
 
   """
-  def hello do
-    :germany
+  def hello() do
+    :world
   end
 end
