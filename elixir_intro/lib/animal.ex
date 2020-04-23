@@ -21,7 +21,7 @@ defmodule Animal do
       iex> Animal.Dillo.run_over(Animal.Dillo.d1)
       %Animal.Dillo{alive?: false, weight: 10}
       iex> Animal.Dillo.run_over(Animal.Dillo.d2)
-      d2
+      Animal.Dillo.d2
     """
 
     @spec run_over(Animal.Dillo.t()) :: Animal.Dillo.t()
@@ -41,5 +41,20 @@ defmodule Animal do
 
     def p1, do: Parrot.make("Hello!", 2)
     def p2, do: Parrot.make("Goodbye!", 3)
+
+    @doc """
+    Papagei überfahren
+
+      iex> Animal.Parrot.run_over(Animal.Parrot.p1)
+      %Animal.Parrot{sentence: "", weight: 2}
+      iex> Animal.Parrot.run_over(Animal.Parrot.p2)
+      Animal.Parrot.make("", 2)
+    """
+    @spec run_over(Parrot.t()) :: Parrot.t()
+    def run_over(parrot) do
+      nil
+    end
+
+
   end
 end
