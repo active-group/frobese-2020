@@ -9,5 +9,9 @@ defmodule Animal do
     #   %Dillo{alive?: alive?, weight: weight}
     # end
     use QuickStruct, [alive?: boolean(), weight: number()]
+
+    def d1 do # Gürteltier, am Leben, 10kg
+      Dillo.make(true, 10)
+    end
   end
 end
