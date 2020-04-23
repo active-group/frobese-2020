@@ -35,4 +35,10 @@ defmodule Animal do
       %{dillo | alive?: false} # Kopie von dillo, nur ist alive? dann false
     end
   end
+
+  defmodule Parrot do
+    use QuickStruct, [sentence: String.t(), weight: number()]
+
+    def p1, do: Parrot.make()
+  end
 end
