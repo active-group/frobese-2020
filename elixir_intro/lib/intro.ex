@@ -130,11 +130,10 @@ defmodule Intro do
   @spec list_map((a -> b), list(a)) :: list(b) when a: var, b: var
 
   def list_map(f, []) do
-
+    []
   end
   def list_map(f, [first | rest]) do
-    f.(first)
-    # list_map(f, rest)
+    [f.(first) | list_map(f, rest)]
   end
 
 
