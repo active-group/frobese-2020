@@ -25,8 +25,12 @@ defmodule Animal do
     """
 
     @spec run_over(Animal.Dillo.t()) :: Animal.Dillo.t()
-    def run_over(dillo) do
-      Dillo.make(false, dillo.weight)
+    # def run_over(dillo) do
+    #   Dillo.make(false, dillo.weight)
+    # end
+    def run_over(%Dillo{alive?: a, weight: w}) do
+      Dillo.make(false, w)
     end
+
   end
 end
