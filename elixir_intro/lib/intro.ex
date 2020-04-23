@@ -68,6 +68,15 @@ defmodule Intro do
      iex> Intro.water_state(100)
      Gas
   """
+  @type state :: Liquid | Solid | Gas
+  @spec water_state(:number) :: state()
+  def water_state(temp) do
+    cond do
+      temp < 0 -> Solid
+      temp < 100 -> Liquid
+      true -> Gas
+    end
+  end
 
 
 
