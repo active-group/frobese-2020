@@ -12,7 +12,22 @@ defmodule ProcessDemo do
 
   def start_echo() do
     # pid = spawn(&echo/0)
-    pid = spawn(ProcessDemo, :echo, [])
+    # pid = spawn(ProcessDemo, :echo, [])
+    # __MODULE__ hier ProcessDemo
+    pid = spawn(__MODULE__, :echo, [])
     Process.register(pid, :echo)
   end
+
+  def inc_loop(n) do
+    receive do
+      i -> IO.puts(i)
+           inc_loop(n + i)
+    end
+  end
+
+  def start_inc_loop(n) do
+    pid = spawn(__MODULE__, :inc_loop, [n])
+    Process.register(pid, :inc)
+  end
+
 end
