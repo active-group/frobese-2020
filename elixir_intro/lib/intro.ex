@@ -147,15 +147,16 @@ defmodule Intro do
   # Elixir-Strings heißen in Erlang "binary"
   # Hin- und Her-Konvertieren mit String.to_charlist, to_string
 
+  # andere Funktion! plus_one/2
+  def plus_one(n, x) do
+    n + x + 1
+  end
 
+  # plus_one/1
   def plus_one(n) do
     n + 1
   end
 
-  # andere Funktion!
-  def plus_one(n, x) do
-    n + x + 1
-  end
 
   def bar do
     list_map(&Intro.plus_one/1, [1, 2, 3])
@@ -164,5 +165,11 @@ defmodule Intro do
   end
 
 
+  def demo1 do
+    spawn(fn ->
+      Process.sleep(10000)
+      IO.puts("Hallo!")
+    end)
+  end
 
 end
