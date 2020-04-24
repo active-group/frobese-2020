@@ -108,6 +108,7 @@ defmodule ProcessDemo do
     # deshalb:
     # spawn_link macht spawn + link atomar
     # spawn_monitor macht spawn + link + trap_exit atomar
-    pid
+    # spawn_monitor
+    # Process.demonitor
   end
 end
