@@ -27,15 +27,19 @@ defmodule ProcessDemo do
 
   def inc_loop(n) do
     receive do
+      # alt:
       {:inc,  i} ->
         IO.puts(n)
         inc_loop(n + i)
+      # neu:
       %Inc{i: i} ->
         IO.puts(n)
         inc_loop(n + i)
+      # alt:
       {:get, sender_pid} ->
         send(sender_pid, n)
         inc_loop(n)
+      # neu:
       %Get{sender_pid: sender_pid} ->
         send(sender_pid, n)
         inc_loop(n)
