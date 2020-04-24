@@ -6,8 +6,9 @@ defmodule Connection do
     # und liefert darum eine Textzeile
     {:ok, line} = :gen_tcp.recv(socket, 0)
     IO.puts("line: #{inspect(line)}")
-    :ok = :gen_tcp.send(socket, ":connected")
+    :ok = :gen_tcp.send(socket, ":connected\n")
     # anderer Prozeß als der GenServer
+    IO.puts("number: #{inspect(Exchange.phone_number_to_atom(ParseTerm.parse(line)))}")
     GenServer.start_link(__MODULE__, {socket, exchange_pid},
                         name: Exchange.phone_number_to_atom(ParseTerm.parse(line)))
   end
