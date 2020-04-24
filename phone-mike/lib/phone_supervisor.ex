@@ -16,5 +16,7 @@ defmodule PhoneSupervisor do
   def start_link(ip, port) do
     Supervisor.start_link(children(ip, port),
                           strategy: :one_for_one)
+    # :one_for_all
+    # :rest_for_one
   end
 end
