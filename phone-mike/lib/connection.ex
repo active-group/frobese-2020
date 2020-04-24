@@ -35,7 +35,7 @@ defmodule Connection do
     # läuft im Prozeß des GenServers
     connection_pid = self() # WICHTIG!!!!!!
     spawn_link(fn -> feed_message_from_socket_to_genserver(socket, connection_pid) end)
-    {:ok, socket}
+    {:ok, State.make(socket, exchange_pid)}
   end
 
   # Andere Nummer wählen
