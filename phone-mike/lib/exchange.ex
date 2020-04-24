@@ -61,7 +61,7 @@ defmodule Exchange do
 
   @impl true
   def handle_call(%LookupPhone{number: number}, _from, _) do
-    case GenServer.whereis(number) do
+    case GenServer.whereis(phone_number_to_atom(number)) do
       nil -> {:reply,
               :not_found,
               nil}
