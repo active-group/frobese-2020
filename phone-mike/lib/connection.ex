@@ -30,6 +30,15 @@ defmodule Connection do
     # läuft im Prozeß des GenServers
     connection_pid = self() # WICHTIG!!!!!!
     spawn_link(fn -> feed_message_from_socket_to_genserver(socket, connection_pid) end)
-    {:ok, nil}
+    {:ok, socket}
   end
+
+  # Andere Nummer wählen
+  # {:dial, <number>}
+
+  def handle_cast({:dial, number}, socket) do
+    Exchange.lookup_phone(exchange_pid, number)
+  end
+
+
 end
