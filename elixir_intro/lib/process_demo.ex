@@ -11,6 +11,7 @@ defmodule ProcessDemo do
   end
 
   def start_echo() do
-    spawn(&echo/0)
+    pid = spawn(&echo/0)
+    Process.register(pid, :echo)
   end
 end
