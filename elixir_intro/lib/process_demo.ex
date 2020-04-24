@@ -98,8 +98,16 @@ defmodule ProcessDemo do
 
   def start_die_process() do
     pid = spawn(&die_process/0)
+    # theoretisch kann der Prozeß hier schon gestorben
     Process.link(pid) # wenn der eine stirbt, stirbt auch der andere
+    # theoretisch kann der Prozeß genau hier sterben
+    # Wenn andere verlinkte Prozesse sterben, sterbe nicht ich,
+    # bekomme aber eine Nachricht {:EXIT, ...}
     Process.flag(:trap_exit, true)
+
+    # deshalb:
+    # spawn_link macht spawn + link atomar
+    # spawn_monitor macht spawn + link + trap_exit atomar
     pid
   end
 end
