@@ -42,7 +42,9 @@ defmodule Connection do
   # {:dial, <number>}
 
   def handle_cast({:dial, number}, state) do
-    Exchange.lookup_phone(state.exchange_pid, number)
+    result = Exchange.lookup_phone(state.exchange_pid, number)
+    IO.puts(inspect(result))
+    {:noreply, state}
   end
 
 
