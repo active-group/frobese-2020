@@ -54,5 +54,17 @@ defmodule Exchange do
     use QuickStruct, [number: term()]
   end
 
+  @spec phone_number_to_atom(term()) :: atom()
+  def phone_number_to_atom(term) do
+    String.to_atom(inspect(term))
+  end
+
+  @impl true
+  def handle_call(%LookupPhone{number: number}, _from, _) do
+    GenServer.whereis(number)
+    {:reply,
+     nil,
+     nil}
+  end
 
 end
