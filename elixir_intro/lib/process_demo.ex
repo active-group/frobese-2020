@@ -20,8 +20,9 @@ defmodule ProcessDemo do
 
   def inc_loop(n) do
     receive do
-      i -> IO.puts(n)
-           inc_loop(n + i)
+      {i, sender_pid} -> IO.puts(n)
+        send(sender_pid, n)
+        inc_loop(n + i)
     end
   end
 
