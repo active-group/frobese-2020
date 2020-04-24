@@ -97,7 +97,7 @@ defmodule ProcessDemo do
   end
 
   def start_die_process() do
-    pid = spawn(&die_process/1)
+    pid = spawn(&die_process/0)
     Process.link(pid)
     pid
   end
