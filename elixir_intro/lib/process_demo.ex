@@ -36,12 +36,21 @@ defmodule ProcessDemo do
     send(pid, {:inc, i})
   end
 
+  def inc(i) do
+    inc(:inc, i)
+  end
+
   def get(pid) do
     send(pid, {:get, self()})
     receive do
       msg -> msg
     end
   end
+
+  def get() do
+    get(:inc)
+  end
+
   def start_inc_loop(n) do
     pid = spawn(__MODULE__, :inc_loop, [n])
     Process.register(pid, :inc)
