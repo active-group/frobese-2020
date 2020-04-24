@@ -31,7 +31,7 @@ defmodule Connection do
 
 
   @impl true
-  def init(socket) do
+  def init(socket, exchange_pid) do
     # läuft im Prozeß des GenServers
     connection_pid = self() # WICHTIG!!!!!!
     spawn_link(fn -> feed_message_from_socket_to_genserver(socket, connection_pid) end)
