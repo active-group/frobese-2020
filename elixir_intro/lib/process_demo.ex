@@ -18,12 +18,25 @@ defmodule ProcessDemo do
     Process.register(pid, :echo)
   end
 
+  defmodule Inc do
+    use QuickStruct, [i: number()]
+  end
+  defmodule Get do
+    use QuickStruct, [sender_pid: pid()]
+  end
+
   def inc_loop(n) do
     receive do
       {:inc,  i} ->
         IO.puts(n)
         inc_loop(n + i)
+      %Inc{i: i} ->
+        IO.puts(n)
+        inc_loop(n + i)
       {:get, sender_pid} ->
+        send(sender_pid, n)
+        inc_loop(n)
+      %Get{sender_pid: sender_pid} ->
         send(sender_pid, n)
         inc_loop(n)
       msg ->
@@ -33,7 +46,8 @@ defmodule ProcessDemo do
   end
 
   def inc(pid, i) do
-    send(pid, {:inc, i})
+    # send(pid, {:inc, i})
+    send(pid, Inc.make(i))
   end
 
   def inc(i) do
