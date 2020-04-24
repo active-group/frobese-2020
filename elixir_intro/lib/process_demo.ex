@@ -24,6 +24,7 @@ defmodule ProcessDemo do
         IO.puts(n)
         send(sender_pid, n)
         inc_loop(n + i)
+      msg -> IO.puts("unknown message: #{inspect(msg)}")
     end
   end
 
