@@ -3,7 +3,8 @@ defmodule Phone do
 
   def start_link(ip, port, number) do
     GenServer.start_link(__MODULE__, {ip, port, number},
-                         [debug: [:trace]])
+                         # Nummer 123 bekommt Namen Phone123
+                         name: String.to_atom("Elixir.Phone" <> to_string(number)))
   end
 
   defmodule Dial do
