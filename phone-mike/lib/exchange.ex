@@ -24,12 +24,21 @@ defmodule Exchange do
   # wie @override in Java
   @impl true
   def init({ip, port}) do
-    :gen_tcp.listen(port, [:binary, # im Gegensatz zu :list
-                           {:packet, 0}, # "natürliche" TCP/IP-Packets
-                           {:active, false}, # {:active, true} bedeutet, daß die Pakete automatisch
-                                             # an Server geschickt
-                           {:ip, ip}
-                          ])
+    {:ok, listen_socket} =
+      :gen_tcp.listen(port, [:binary, # im Gegensatz zu :list
+                            {:packet, 0}, # "natürliche" TCP/IP-Packets
+                            {:active, false}, # {:active, true} bedeutet, daß die Pakete automatisch
+                                              # an Server geschickt
+                            {:ip, ip}
+                            ])
+    accept_loop()
+  end
+
+  def accept_loop() do
+    # blockiert, bis ein Klient vorbeikommt, macht dann einen neuen Socket
+    {:ok, socket} = :gen_tcp.accept(listen_socket)
+    # mach irgendwas mit dem Socket
+    accept_loop()
   end
 
 
