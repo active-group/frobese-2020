@@ -29,6 +29,7 @@ defmodule ProcessDemo do
     use QuickStruct, [sender_pid: pid()]
   end
 
+  # Server
   def inc_loop(n) do
     receive do
       # alt:
@@ -53,6 +54,12 @@ defmodule ProcessDemo do
     end
   end
 
+  def start_inc_loop(n) do
+    pid = spawn(__MODULE__, :inc_loop, [n])
+    Process.register(pid, :inc)
+  end
+
+  # Client
   def inc(pid, i) do
     # send(pid, {:inc, i})
     send(pid, Inc.make(i))
@@ -71,11 +78,6 @@ defmodule ProcessDemo do
 
   def get() do
     get(:inc)
-  end
-
-  def start_inc_loop(n) do
-    pid = spawn(__MODULE__, :inc_loop, [n])
-    Process.register(pid, :inc)
   end
 
 end
