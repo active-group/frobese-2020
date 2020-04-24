@@ -28,6 +28,7 @@ defmodule Connection do
 
   defmodule State do
     use QuickStruct, [socket: :inet.socket(), exchange_pid: pid()]
+    # noch benötigt connection: pid() | nil
   end
 
 
