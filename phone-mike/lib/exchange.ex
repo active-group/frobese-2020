@@ -62,10 +62,10 @@ defmodule Exchange do
   @impl true
   def handle_call(%LookupPhone{number: number}, _from, _) do
     case GenServer.whereis(number) do
-      nil -> {:error,
-              nil,
+      nil -> {:reply,
+              :not_found,
               nil}
-      pid -> {:reply, nil, nil}
+      pid -> {:reply, {:ok, pid}, nil}
     end
   end
 
