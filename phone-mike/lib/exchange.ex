@@ -26,7 +26,8 @@ defmodule Exchange do
   def init({ip, port}) do
     {:ok, listen_socket} =
       :gen_tcp.listen(port, [:binary, # im Gegensatz zu :list
-                            {:packet, 0}, # "natürliche" TCP/IP-Packets
+                            # {:packet, 0}, # "natürliche" TCP/IP-Packets
+                            {:packet, :line}, # einzelne Textzeile
                             {:active, false}, # {:active, true} bedeutet, daß die Pakete automatisch
                                               # an Server geschickt
                             {:ip, ip}
