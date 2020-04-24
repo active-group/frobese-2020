@@ -53,7 +53,7 @@ defmodule Exchange do
 
   def start_connection(socket, exchange_pid) do
     # FIXME: Eine sterbende Connection zieht den ganzen Laden runter
-    Connection.start_link(socket, exchange_pid)
+    spawn(fn -> Connection.start_link(socket, exchange_pid))
   end
 
   # Exchange hat zwei Aufgaben:
