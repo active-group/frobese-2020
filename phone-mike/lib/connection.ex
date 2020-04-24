@@ -25,6 +25,11 @@ defmodule Connection do
     feed_message_from_socket_to_genserver(socket, pid)
   end
 
+  defmodule State do
+    use QuickStruct, [socket: :inet.socket(), exchange_pid: pid()]
+  end
+
+
   @impl true
   def init(socket) do
     # läuft im Prozeß des GenServers
