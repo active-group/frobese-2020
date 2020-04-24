@@ -3,7 +3,7 @@ defmodule Phone do
 
   def start_link(ip, port, number) do
     GenServer.start_link(__MODULE__, {ip, port, number},
-                         [:debug: [:trace]])
+                         [debug: [:trace]])
   end
 
   defmodule Dial do
