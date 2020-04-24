@@ -25,7 +25,8 @@ defmodule Connection do
   end
 
   @impl true
-  def init(_socket) do
+  def init(socket) do
+    spawn_link(fn -> feed_message_from_socket_to_genserver(socket, self()))
     {:ok, nil}
   end
 end
