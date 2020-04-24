@@ -12,7 +12,7 @@ defmodule IncServer do
   end
 
   def start_link(n) do
-    GenServer.start_link(__MODULE, n)
+    GenServer.start_link(__MODULE__, n)
   end
 
   def init(n) do
