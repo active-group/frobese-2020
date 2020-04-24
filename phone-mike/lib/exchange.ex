@@ -37,21 +37,22 @@ defmodule Exchange do
                                               # an Server geschickt
                             {:ip, ip}
                             ])
-    spawn_link(fn -> accept_loop(listen_socket) end)
+
+    exchange_pid = self() # NICHT INS SPAWN_LINK!
+    spawn_link(fn -> accept_loop(listen_socket, exchange_pid) end)
     {:ok, nil}
   end
 
-  def accept_loop(listen_socket) do
+  def accept_loop(listen_socket, exchange_pid) do
     # blockiert, bis ein Klient vorbeikommt, macht dann einen neuen Socket
     {:ok, socket} = :gen_tcp.accept(listen_socket)
     # mach irgendwas mit dem Socket
-    start_connection(socket)
+    start_connection(socket, exchange_pid)
     accept_loop(listen_socket)
   end
 
-  def start_connection(socket) do
+  def start_connection(socket, exchange_pid) do
     # Eine sterbende Connection zieht den ganzen Laden runter
-    exchange_pid = self()
     Connection.start_link(socket, exchange_pid)
   end
 
