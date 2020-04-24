@@ -51,6 +51,7 @@ defmodule Exchange do
 
   def start_connection(socket) do
     # Eine sterbende Connection zieht den ganzen Laden runter
+    exchange_pid = self()
     Connection.start_link(socket, exchange_pid)
   end
 
