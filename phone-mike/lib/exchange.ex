@@ -51,7 +51,7 @@ defmodule Exchange do
 
   def start_connection(socket) do
     # Eine sterbende Connection zieht den ganzen Laden runter
-    Connection.start_link(socket)
+    Connection.start_link(socket, exchange_pid)
   end
 
   # Exchange hat zwei Aufgaben:
