@@ -20,12 +20,14 @@ defmodule ProcessDemo do
 
   def inc_loop(n) do
     receive do
-      {i, sender_pid} ->
+      {:inc,  i} ->
         IO.puts(n)
-        send(sender_pid, n)
         inc_loop(n + i)
+      {:get, sender_pid} ->
+        send(sender_pid, n)
+        inc_loop(n)
       msg ->
-        IO.puts("unknown message: #{msg}")
+        IO.puts("unknown message: #{inspect(msg)}")
         inc_loop(n)
     end
   end
