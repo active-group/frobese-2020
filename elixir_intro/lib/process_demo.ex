@@ -88,4 +88,11 @@ defmodule ProcessDemo do
     spawn(fn -> send(pid, :message2) end)
     send(pid, :message3)
   end
+
+  def die_process() do
+    receive do
+      msg -> IO.puts(10 / msg)
+             die_process()
+    end
+  end
 end
