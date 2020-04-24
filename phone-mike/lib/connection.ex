@@ -41,8 +41,8 @@ defmodule Connection do
   # Andere Nummer wählen
   # {:dial, <number>}
 
-  def handle_cast({:dial, number}, socket) do
-    Exchange.lookup_phone(exchange_pid, number)
+  def handle_cast({:dial, number}, state) do
+    Exchange.lookup_phone(state.exchange_pid, number)
   end
 
 
