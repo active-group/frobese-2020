@@ -38,8 +38,12 @@ defmodule Exchange do
     # blockiert, bis ein Klient vorbeikommt, macht dann einen neuen Socket
     {:ok, socket} = :gen_tcp.accept(listen_socket)
     # mach irgendwas mit dem Socket
+    start_connection(socket)
     accept_loop(listen_socket)
   end
 
+  def start_connection(_socket) do
+    nil
+  end
 
 end
