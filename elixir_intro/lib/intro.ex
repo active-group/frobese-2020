@@ -153,7 +153,7 @@ defmodule Intro do
   end
 
   def foo do
-    list_map(plus_one, [1, 2, 3])
+    list_map(Intro.plus_one, [1, 2, 3])
   end
 
 
