@@ -29,7 +29,7 @@ defmodule IncServer do
   end
   # Wert abholen
   defmodule Get do
-    use QuickStruct, [sender_pid: pid()]
+    use QuickStruct, []
   end
 
   def handle_cast(%Inc{i: i}, n) do
@@ -37,10 +37,10 @@ defmodule IncServer do
     {:noreply, n + i}
   end
 
-  def handle_call(%Get{sender_pid: sender_pid}, _from, n) do
+  def handle_call(%Get{}, _from, n) do
     # Doku:  {:reply, reply, new_state}
     {:reply,
-     n, # Antwort
+     n, # Antwort, GenServer schickt die automatisch zurück
      n} # neue Zustand
   end
 end
