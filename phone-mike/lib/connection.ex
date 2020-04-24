@@ -45,8 +45,12 @@ defmodule Connection do
 
   @impl true
   def handle_cast({:dial, number}, state) do
-    result = Exchange.lookup_phone(state.exchange_pid, number)
-    IO.puts(inspect(result))
+    case Exchange.lookup_phone(state.exchange_pid, number) do
+      {:ok, pid} ->
+        :gen_tcp.send(state.socket, ":found\n")
+      :not_found ->
+        :gen_tcp.send(state.socket, ":not_found\n")
+    end
     {:noreply, state}
   end
 
