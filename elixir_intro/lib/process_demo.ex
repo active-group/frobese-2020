@@ -70,7 +70,8 @@ defmodule ProcessDemo do
   end
 
   def get(pid) do
-    send(pid, {:get, self()})
+    # send(pid, {:get, self()})
+    send(pid, Get.make(self()))
     receive do
       msg -> msg
     end
