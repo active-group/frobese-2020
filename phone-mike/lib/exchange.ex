@@ -49,8 +49,8 @@ defmodule Exchange do
     accept_loop(listen_socket)
   end
 
-  def start_connection(_socket) do
-    nil # FIXME
+  def start_connection(socket) do
+    Connection.start_link(socket)
   end
 
   # Exchange hat zwei Aufgaben:
