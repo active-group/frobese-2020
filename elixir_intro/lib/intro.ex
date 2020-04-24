@@ -152,8 +152,13 @@ defmodule Intro do
     n + 1
   end
 
+  # andere Funktion!
+  def plus_one(n, x) do
+    n + x + 1
+  end
+
   def foo do
-    list_map(Intro.plus_one, [1, 2, 3])
+    list_map(Intro.plus_one/1, [1, 2, 3])
   end
 
 
