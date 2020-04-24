@@ -48,7 +48,7 @@ defmodule Exchange do
     start_connection(socket)
     accept_loop(listen_socket)
   end
-1
+
   def start_connection(_socket) do
     nil # FIXME
   end
