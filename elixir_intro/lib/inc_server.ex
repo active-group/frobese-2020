@@ -21,7 +21,7 @@ defmodule IncServer do
   # und Nachrichten, die eine Antwort erwarten: "call"
   # wie Get
 
-    # Messages, die inc_loop akzeptiert:
+  # Messages, die inc_loop akzeptiert:
 
   # um Wert inkrementieren
   defmodule Inc do
@@ -35,5 +35,12 @@ defmodule IncServer do
   def handle_cast(%Inc{i: i}, n) do
     IO.puts("current state: #{n}")
     {:noreply, n + i}
+  end
+
+  def handle_call(%Get{sender_pid: sender_pid}, _from, n) do
+    # Doku:  {:reply, reply, new_state}
+    {:reply,
+     n, # Antwort
+     n} # neue Zustand
   end
 end
