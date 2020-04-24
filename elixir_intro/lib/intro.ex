@@ -157,7 +157,7 @@ defmodule Intro do
     n + x + 1
   end
 
-  def foo do
+  def bar do
     list_map(&Intro.plus_one/1, [1, 2, 3])
   end
 
