@@ -23,7 +23,13 @@ defmodule Exchange do
 
   # wie @override in Java
   @impl true
-  def ini({ip, port}) do
+  def init({ip, port}) do
+    :gen_tcp.listen(port, [:binary, # im Gegensatz zu :list
+                           {:packet, 0}, # "natürliche" TCP/IP-Packets
+                           {:active, false}, # {:active, true} bedeutet, daß die Pakete automatisch
+                                             # an Server geschickt
+                           {:ip, ip}
+                          ])
   end
 
 
