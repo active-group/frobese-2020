@@ -31,7 +31,8 @@ defmodule Exchange do
                                               # an Server geschickt
                             {:ip, ip}
                             ])
-    accept_loop(listen_socket)
+    spawn_link(fn -> accept_loop(listen_socket) end)
+    {:ok, nil}
   end
 
   def accept_loop(listen_socket) do
@@ -41,9 +42,17 @@ defmodule Exchange do
     start_connection(socket)
     accept_loop(listen_socket)
   end
-
+1
   def start_connection(_socket) do
-    nil
+    nil # FIXME
   end
+
+  # Exchange hat zwei Aufgaben:
+  # - neue Verbindungen entgegennehmen
+  # - für eine Telefonnummer den Connection-Prozeß finden
+  defmodule LookupPhone do
+    use QuickStruct, [number: term()]
+  end
+
 
 end
