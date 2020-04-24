@@ -81,4 +81,11 @@ defmodule ProcessDemo do
     get(:inc)
   end
 
+  def order(pid) do
+    # :message1 kommt auf jeden Fall vor :message3 an
+    # möglicherweise kommt :message1 auch vor :message2 an
+    send(pid, :message1)
+    spawn(fn -> send(pid, :message2) end)
+    send(pid, :message3)
+  end
 end
