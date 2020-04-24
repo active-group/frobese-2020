@@ -148,4 +148,14 @@ defmodule Intro do
   # Hin- und Her-Konvertieren mit String.to_charlist, to_string
 
 
+  def plus_one(n) do
+    n + 1
+  end
+
+  def foo do
+    list_map(plus_one, [1, 2, 3])
+  end
+
+
+
 end
