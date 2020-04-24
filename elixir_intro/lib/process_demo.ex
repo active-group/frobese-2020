@@ -98,7 +98,8 @@ defmodule ProcessDemo do
 
   def start_die_process() do
     pid = spawn(&die_process/0)
-    Process.link(pid)
+    Process.link(pid) # wenn der eine stirbt, stirbt auch der andere
+    Process.flag(:trap_exit, true)
     pid
   end
 end
