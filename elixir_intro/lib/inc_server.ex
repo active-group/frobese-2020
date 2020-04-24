@@ -11,6 +11,10 @@ defmodule IncServer do
     GenServer.start(__MODULE__, n)
   end
 
+  def start_link(n) do
+    GenServer.start_link(__MODULE, n)
+  end
+
   def init(n) do
     {:ok, n} # n: initialer Zustand
   end
