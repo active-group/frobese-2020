@@ -5,9 +5,9 @@ defmodule Connection do
     # Socket hat {:packet, :line}
     # und liefert darum eine Textzeile
     {:ok, line} = :gen_tcp.recv(socket, 0)
-
+    IO.puts("line: #{inspect(line)}")
     GenServer.start_link(__MODULE__, socket,
-                        name: Exchange.phone_number_to_atom(number))
+                        name: Exchange.phone_number_to_atom(line))
   end
 
   @impl true
