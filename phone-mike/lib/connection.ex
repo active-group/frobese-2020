@@ -1,7 +1,7 @@
 defmodule Connection do
   use GenServer
 
-  def start_link(socket) do
+  def start_link(socket, exchange_pid) do
     # Socket hat {:packet, :line}
     # und liefert darum eine Textzeile
     {:ok, line} = :gen_tcp.recv(socket, 0)
