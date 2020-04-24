@@ -3,9 +3,11 @@ defmodule ProcessDemo do
   # for (;;) { ... }
   def echo() do
     receive do
-      msg -> IO.puts(msg)
+      :terminate -> nil
+      msg ->
+        IO.puts(msg)
+        echo() # endrekursiver Aufruf
     end
-    echo() # endrekursiver Aufruf
   end
 
   def start_echo() do
