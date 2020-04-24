@@ -18,9 +18,13 @@ defmodule ProcessDemo do
     Process.register(pid, :echo)
   end
 
+  # Messages, die inc_loop akzeptiert:
+
+  # um Wert inkrementieren
   defmodule Inc do
     use QuickStruct, [i: number()]
   end
+  # Wert abholen
   defmodule Get do
     use QuickStruct, [sender_pid: pid()]
   end
