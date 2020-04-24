@@ -69,9 +69,9 @@ defmodule Exchange do
     end
   end
 
-  # @spec lookup_phone(pid(), term()):: :not_found | {:ok, pid()}
+  @spec lookup_phone(pid(), term()):: :not_found | {:ok, pid()}
   def lookup_phone(exchange_pid, number) do
-    GenServer.call(exchange_pid, LookupPhone.make(number))
+    # GenServer.call(exchange_pid, LookupPhone.make(number))
   end
 
 end
