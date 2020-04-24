@@ -18,7 +18,7 @@ defmodule Phone do
 
   @impl true
   def handle_info({:tcp, _socket, line}, socket) do
-    term = ParseTerm.parse(line)
+    {:ok, term} = ParseTerm.parse(line)
     IO.puts("tcp: #{inspect(term)}")
     case term do
       :connected -> {:noreply, socket}
