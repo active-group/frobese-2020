@@ -13,7 +13,7 @@ defmodule Exchange do
   # daraufhin einen Connection-Prozeß hochfährt.
 
   def start_link(ip, port) do
-    GenServer.start_link(__MODULE,
+    GenServer.start_link(__MODULE__,
                          {ip, port})
   end
 
