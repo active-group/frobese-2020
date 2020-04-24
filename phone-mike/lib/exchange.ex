@@ -52,7 +52,7 @@ defmodule Exchange do
   end
 
   def start_connection(socket, exchange_pid) do
-    # Eine sterbende Connection zieht den ganzen Laden runter
+    # FIXME: Eine sterbende Connection zieht den ganzen Laden runter
     Connection.start_link(socket, exchange_pid)
   end
 
