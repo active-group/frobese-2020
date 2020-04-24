@@ -9,7 +9,7 @@ defmodule Connection do
     :ok = :gen_tcp.send(socket, ":connected")
     # anderer Prozeß als der GenServer
     GenServer.start_link(__MODULE__, {socket, exchange_pid},
-                        name: Exchange.phone_number_to_atom(line))
+                        name: Exchange.phone_number_to_atom(ParseTerm.parse(line)))
   end
 
   # Telefonanruf:
