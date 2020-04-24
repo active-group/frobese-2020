@@ -158,7 +158,7 @@ defmodule Intro do
   end
 
   def bar do
-    list_map(&Intro.plus_one/1, [1, 2, 3])
+    list_map(Intro.plus_one/1, [1, 2, 3])
   end
 
 
