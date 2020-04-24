@@ -1,18 +1,12 @@
 defmodule Phone do
-  @moduledoc """
-  Documentation for `Phone`.
-  """
+  use GenServer
 
-  @doc """
-  Hello world.
+  @impl true
+  def init(_) do
+    # connect redet mit accept
+    {:ok, socket} = :gen_tcp.connect(ip, port, [:binary,
+                                                {:packet, :line},
+                                                {:active, true}])
 
-  ## Examples
-
-      iex> Phone.hello()
-      :world
-
-  """
-  def hello do
-    :world
   end
 end
