@@ -12,6 +12,28 @@ defmodule IncServer do
   end
 
   def init(n) do
-    {:ok, n} # n: initiale Zustand
+    {:ok, n} # n: initialer Zustand
+  end
+
+  # GenServer unterscheidet zwischen "fire-or-forget"-Nachrichten: "cast"
+  # NICHT WIE JAVA-CAST!
+  # wie Inc
+  # und Nachrichten, die eine Antwort erwarten: "call"
+  # wie Get
+
+    # Messages, die inc_loop akzeptiert:
+
+  # um Wert inkrementieren
+  defmodule Inc do
+    use QuickStruct, [i: number()]
+  end
+  # Wert abholen
+  defmodule Get do
+    use QuickStruct, [sender_pid: pid()]
+  end
+
+  def handle_cast(%Inc{i: i}, n) do
+    IO.puts("current state: #{n}")
+    {:noreply, n + i}
   end
 end
