@@ -8,7 +8,7 @@ defmodule Connection do
     IO.puts("line: #{inspect(line)}")
     :ok = :gen_tcp.send(socket, ":connected")
     # anderer Prozeß als der GenServer
-    GenServer.start_link(__MODULE__, socket,
+    GenServer.start_link(__MODULE__, {socket, exchange_pid},
                         name: Exchange.phone_number_to_atom(line))
   end
 
@@ -31,7 +31,7 @@ defmodule Connection do
 
 
   @impl true
-  def init(socket, exchange_pid) do
+  def init({socket, exchange_pid}) do
     # läuft im Prozeß des GenServers
     connection_pid = self() # WICHTIG!!!!!!
     spawn_link(fn -> feed_message_from_socket_to_genserver(socket, connection_pid) end)
