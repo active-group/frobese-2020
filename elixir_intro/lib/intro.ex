@@ -159,6 +159,8 @@ defmodule Intro do
 
   def bar do
     list_map(&Intro.plus_one/1, [1, 2, 3])
+    f = fn n -> n + 1 end
+    f(5)
   end
 
 
