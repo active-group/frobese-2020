@@ -31,14 +31,14 @@ defmodule Exchange do
                                               # an Server geschickt
                             {:ip, ip}
                             ])
-    accept_loop()
+    accept_loop(listen_socket)
   end
 
-  def accept_loop() do
+  def accept_loop(listen_socket) do
     # blockiert, bis ein Klient vorbeikommt, macht dann einen neuen Socket
     {:ok, socket} = :gen_tcp.accept(listen_socket)
     # mach irgendwas mit dem Socket
-    accept_loop()
+    accept_loop(listen_socket)
   end
 
 
