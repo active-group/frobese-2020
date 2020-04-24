@@ -7,4 +7,8 @@ defmodule ProcessDemo do
     end
     echo() # endrekursiver Aufruf
   end
+
+  def start_echo() do
+    spawn(&echo/0)
+  end
 end
