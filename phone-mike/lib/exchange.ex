@@ -48,7 +48,7 @@ defmodule Exchange do
     {:ok, socket} = :gen_tcp.accept(listen_socket)
     # mach irgendwas mit dem Socket
     start_connection(socket, exchange_pid)
-    accept_loop(listen_socket)
+    accept_loop(listen_socket, exchange_pid)
   end
 
   def start_connection(socket, exchange_pid) do
