@@ -19,7 +19,8 @@ defmodule Connection do
 
   def feed_message_from_socket_to_genserver(socket, pid) do
     {:ok, line} = :gen_tcp.recv(socket, 0)
-    GenServer.cast(pid, line)
+    {:ok, term} = parseTerm.parse(line)
+    GenServer.cast(pid, term)
     feed_message_from_socket_to_genserver(socket, pid)
   end
 
