@@ -12,6 +12,11 @@ defmodule Exchange do
   # es nimmt Verbindung auf zum Exchange, der
   # daraufhin einen Connection-Prozeß hochfährt.
 
+  def start_link(ip, port) do
+    GenServer.start_link(__MODULE,
+                         {ip, port})
+  end
+
   # Blog-Post:
   # init()
   #
