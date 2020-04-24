@@ -17,8 +17,13 @@ defmodule Phone do
   # handle_call dito nur GenServer.call
 
   @impl true
-  def handle_info({:tcp, socket, line}, _socket) do
-
+  def handle_info({:tcp, _socket, line}, socket) do
+    term = ParseTerm.parse(line)
+    case term of
+      :connected -> {:noreply, socket}
+      :found -> {:noreply, socket}
+      :not_found -> {:noreply, socket}
+    end
   end
 
 end
