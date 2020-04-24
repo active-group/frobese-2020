@@ -8,7 +8,7 @@ defmodule IncServer do
     #    bekommt es den initialen Zustand
     # 3. startet dann eine endrekursive Schleife, die Nachrichten akzeptiert,
     #    beantwortet und den Zustand verwaltet
-    GenServer.start(__MODULE__, n, name: {:global, :inc})
+    GenServer.start(__MODULE__, n)
   end
 
   def start_link(n) do
