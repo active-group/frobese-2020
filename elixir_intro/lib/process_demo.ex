@@ -24,7 +24,9 @@ defmodule ProcessDemo do
         IO.puts(n)
         send(sender_pid, n)
         inc_loop(n + i)
-      msg -> IO.puts("unknown message: #{msg}")
+      msg ->
+        IO.puts("unknown message: #{msg}")
+        inc_loop(n)
     end
   end
 
