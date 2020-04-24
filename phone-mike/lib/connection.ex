@@ -12,6 +12,6 @@ defmodule Connection do
 
   @impl true
   def init(socket) do
-    # {:ok, ... state ...}
+    {:ok, nil}
   end
 end
