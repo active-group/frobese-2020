@@ -2,7 +2,7 @@ defmodule Phone do
   use GenServer
 
   @impl true
-  def init(_) do
+  def init({port, ip}) do
     # connect redet mit accept
     {:ok, socket} = :gen_tcp.connect(ip, port, [:binary,
                                                 {:packet, :line},
