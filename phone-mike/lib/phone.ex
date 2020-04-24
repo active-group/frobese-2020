@@ -5,6 +5,14 @@ defmodule Phone do
     GenServer.start_link(__MODULE__, {ip, port, number})
   end
 
+  defmodule Dial do
+    use QuickStruct, [number: term()]
+  end
+
+  def dial(phone_pid, number) do
+    GenServer.cast(phone_pid, Dial.make(number))
+  end
+
   @impl true
   def init({ip, port, number}) do
     # connect redet mit accept
@@ -19,6 +27,12 @@ defmodule Phone do
 
   # handle_cast verarbeitet *nur* GenServer.cast-Nachrichten
   # handle_call dito nur GenServer.call
+
+  @impl true
+  def handle_cast(%Dial{number: number}, socket) do
+    :ok = :gen_tcp.send(socket, inspect({:dial, number}) <> "\n")
+    {:noreply, socket}
+  end
 
   @impl true
   def handle_info({:tcp, _socket, line}, socket) do
