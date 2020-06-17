@@ -30,7 +30,7 @@ dillo2() -> #dillo{alive = false, weight = 12}.
 run_over_dillo(#dillo{weight = Weight}) ->
     #dillo{alive = false, weight = Weight}.
 
--record(parrot, {sentence :: string(), weight :: pos_integer}).
+-record(parrot, {sentence :: string(), weight :: pos_integer()}).
 
 -type animal() :: #dillo{} | #parrot{}.
 
