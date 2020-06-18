@@ -2,7 +2,11 @@
 
 -module(database).
 -include("data.hrl").
--export([init_database/0, put_account/1, get_account/1, get_all_accounts/0, put_person/1, get_person/1, get_all_persons/0, put_transaction/1, get_transaction/1, get_all_transactions/0, unique_account_number/0,unique_tx_id/0, unique_person_id/0]).
+-export([init_database/0,
+         put_account/1, get_account/1, get_all_accounts/0,
+         put_person/1, get_person/1, get_all_persons/0, 
+         put_transaction/1, get_transaction/1, get_all_transactions/0, get_all_transactions/1, 
+         unique_account_number/0,unique_tx_id/0, unique_person_id/0]).
 
 %% destroy tables in case they already existed
 destroy_tables() ->
@@ -84,7 +88,18 @@ get_transaction(TransactionId) ->
 get_all_transactions() ->
     read_all(transaction).
 
-
+-spec get_all_transactions(account_number()) -> list(#transaction{}).
+get_all_transactions(AccountNr) ->
+    Fun = fun() ->
+            mnesia:select(transaction,
+                           [{'$1',
+                            [{'orelse',
+                                {'==', {element, #transaction.from_acc_nr, '$1'}, AccountNr},
+                                {'==', {element, #transaction.to_acc_nr, '$1'}, AccountNr}}],
+                            ['$_']}]) 
+          end,
+    {atomic, Res} = mnesia:transaction(Fun),
+    Res.
 
 -spec unique_person_id() -> unique_id().
 unique_person_id() ->

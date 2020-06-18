@@ -199,11 +199,7 @@ init(Req, request) ->
     KnowsCurrency = exchange_service:knows_currency(Currency),
     case {KnowsCurrency, Ret} of
         {true, {ok, Account}} ->
-            AllTxs = database:get_all_transactions(),
-            Txs = lists:filter(fun(Tx) -> Tx#transaction.from_acc_nr == AccountNumber orelse
-                                                      Tx#transaction.to_acc_nr == AccountNumber
-                                       end, AllTxs),
-
+            Txs = database:get_all_transactions(AccountNumber),
             Body = statement(Account, Txs, Currency, Format),
             Req2 = cowboy_req:reply(200, #{<<"content-type">> => <<"text/html">>},
                                     Body, Req),
