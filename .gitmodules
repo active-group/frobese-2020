@@ -1,0 +1,9 @@
+[submodule "erlbank/accounts"]
+	path = erlbank/accounts
+	url = git@github.com:active-group/frobese-2020-accounts.git
+[submodule "erlbank/transactions"]
+	path = erlbank/transactions
+	url = git@github.com:active-group/frobese-2020-transactions.git
+[submodule "erlbank/bank-statements"]
+	path = erlbank/bank-statements
+	url = git@github.com:active-group/frobese-2020-bank-statements.git
