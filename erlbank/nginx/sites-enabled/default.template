@@ -16,18 +16,18 @@ server {
     location /accounts/ {
         ssi on;
         proxy_set_header Accept-Encoding "";
-        proxy_pass http://accounts-host:8000/accounts/;
+        proxy_pass http://${ACCOUNTS_HOST}:8000/accounts/;
     }
 
     location /transactions/ {
         ssi on;
         proxy_set_header Accept-Encoding "";
-        proxy_pass http://transactions-host:8001/transactions/;
+        proxy_pass http://${TRANSACTIONS_HOST}:8001/transactions/;
     }
 
     location /bank-statements/ {
         ssi on;
         proxy_set_header Accept-Encoding "";
-        proxy_pass http://bankstatements-host:9001/bank-statements/;
+        proxy_pass http://${BANK_STATEMENTS_HOST}:9001/bank-statements/;
     }
 }

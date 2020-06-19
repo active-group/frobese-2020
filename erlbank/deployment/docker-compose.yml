@@ -45,12 +45,58 @@ services:
       - elasticsearch
     networks:
       - net1
-    
+
+  accounts:
+    environment: 
+      - NODE_NAME=accounts
+      - RELX_REPLACE_OS_VARS=true
+      - DEBUG=1
+    hostname: accounts-host
+    container_name: accounts-host
+    build: ../accounts/erlbank
+    command: ["deploy-with-elk"]
+    ports:
+      - 8000:8000
+    depends_on:
+      - logstash
+    networks:
+      - net1
+
+  transactions:
+    environment: 
+      - NODE_NAME=transactions
+      - RELX_REPLACE_OS_VARS=true
+      - ACCOUNT_NODE=accounts@accounts-host
+    hostname: transactions-host
+    container_name: transactions-host
+    command: ["deploy-with-elk"]
+    build: ../transactions/
+    depends_on:
+      - accounts
+    networks:
+      - net1
+
+  bank_statements:
+    environment: 
+      - NODE_NAME=bankstatements
+      - RELX_REPLACE_OS_VARS=true
+      - ACCOUNT_NODE=accounts@accounts-host
+      - TRANSACTION_NODE=transactions@transactions-host
+    hostname: bankstatements-host
+    container_name: bankstatements-host
+    command: ["deploy-with-elk"]
+    build: ../bank-statements/
+    depends_on:
+      - transactions
+    networks:
+      - net1
+
+        
   nginx:
-#    environment: 
-#      - ACCOUNTS_HOST=accounts-host
-#      - TRANSACTIONS_HOST=transactions-host
-#      - BANK_STATEMENTS_HOST=bankstatements-host
+    environment: 
+      - ACCOUNTS_HOST=accounts-host
+      - TRANSACTIONS_HOST=transactions-host
+      - BANK_STATEMENTS_HOST=bankstatements-host
     image: nginx:latest
     container_name: production_nginx
     volumes:
@@ -59,8 +105,8 @@ services:
     ports:
       - 8080:80
       - 443:443
-#    depends_on:
-#      - bank_statements
+    depends_on:
+      - bank_statements
     command: /bin/bash -c "envsubst < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
     networks:
       - net1
