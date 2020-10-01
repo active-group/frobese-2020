@@ -1,0 +1,58 @@
+@startuml
+!include plantuml/C4_Container.puml
+
+Person(user, "User", "regular user (expedient, planner, charterer, scheduler)")
+Person(sysAdmin, "System administrator", "installs and configures the system")
+Person(driver, "Bus driver", "drives a bus")
+
+Person(sysAdmin, "System administrator", "installs and configures the system")
+
+System_Boundary(software, "Software packages") {
+Container(tourism, "Tourism", "manages tourist packages")
+Container(planning, "Planning", "manages personnel plans for bus lines, trips, and school buses")
+Container(charter, "Charter", "manages leases for custom bus trips")
+Container(scheduler, "Scheduler", "manages bus schedules")
+Container(sync, "Synchronizer", "synchronizes between App DB and local software")
+}
+
+Rel(user, tourism, "Uses", "Desktop use")
+Rel(user, planning, "Uses", "Desktop use")
+Rel(user, charter, "Uses", "Desktop use")
+Rel(user, scheduler, "Uses", "Desktop use")
+
+Rel(sysAdmin, tourism, "Administers", "Configures and administers")
+Rel(sysAdmin, planning, "Administers", "Configures and administers")
+Rel(sysAdmin, charter, "Administers", "Configures and administers")
+Rel(sysAdmin, scheduler, "Administers", "Configures and administers")
+
+Container(app, "App", "Mobile app")
+Container(cloudDB, "Cloud DB", "SQLServer on Azure")
+
+
+
+Rel(driver, scheduler, "Uses", "receives trip information, reports duty start, end")
+Rel(driver, app, "Uses", "receives trip information, reports duty start, end")
+
+System_Boundary(storage, "Storage system") {
+Container(mpmdb, "MP.mdb", "database primarily attached to Charter") 
+Container(rpmdb, "RP.mdb", "database primarily attached to Tourism")
+Container(LPWinrdb, "LPWin.mdb", "database primarily attached to Schedule")
+Container(Nmdb, "N.mdb", "database primarily attached to Schedule")
+Container(DPFmdb, "DPF.mdb", "database primarily attached to Schedule")
+Container(BPKWinmdb, "BPKWin.mdb", "database primarily attached to Schedule")
+}
+
+Rel(charter, mpmdb, "Accesses", "queries and writes to")
+Rel(tourism, mpmdb, "Accesses", "queries and writes to")
+Rel(tourism, rpmdb, "Accesses", "queries and writes to")
+Rel(scheduler, LPWinrdb, "Accesses", "queries and writes to")
+Rel(scheduler, Nmdb, "Accesses", "queries and writes to")
+Rel(planning, DPFmdb, "Accesses", "queries and writes to")
+Rel(charter, DPFmdb, "Accesses", "queries and writes to")
+Rel(tourism, BPKWinmdb, "Accesses", "queries and writes to")
+Rel(charter, BPKWinmdb, "Accesses", "queries and writes to")
+
+Rel(app, cloudDB, "Accesses", "reads schedules, writes trips")
+Rel(sync, cloudDB, "Synchronizes", "writes schedules, reads trips")
+Rel(sync, DPFmdb, "Accesses", "reads schedules, writes trips")
+@enduml

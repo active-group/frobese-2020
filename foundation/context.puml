@@ -1,0 +1,27 @@
+@startuml
+!include plantuml/C4_Context.puml
+
+Person(expedient, "Expedient", "devises and sells tourist packages")
+Person(planner, "Planner", "plans personnel for bus lines, trips, and school buses")
+Person(charterer, "Charterer", "sells leases for custom bus trips")
+Person(scheduler, "Scheduler", "plans bus schedules")
+Person(sysAdmin, "System administrator", "installs and configures the system")
+Person(driver, "Bus driver", "drives a bus")
+Person(accountant, "Accountant", "manages financial data, invoices, payrolls, etc.")
+
+System(busSystem, "Bus System", "Software for managing bus operations")
+System(app, "App", "Mobile app")
+
+Rel(expedient, busSystem, "Uses", "inputs customer data, manages quotas, vouchers, insurance, generates reports")
+Rel(planner, busSystem, "Uses", "assigns personnel and buses to trips and bus lines")
+Rel(charterer, busSystem, "Uses", "inputs customer data, generates proposals, manages calendar, generates reports")
+Rel(scheduler, busSystem, "Uses", "inputs routes, frequency, other constraints, generates schedules, generates reports")
+Rel(sysAdmin, busSystem, "Administers", "decides on container topology, distributes software, manages storage")
+Rel(driver, busSystem, "Uses", "receives trip information, reports duty start, end")
+Rel(accountant, busSystem, "Uses", "generates reports, sends out invoices, pays payroll")
+Rel(busSystem, app, "Exchanges Data", "exchange data about trip planning and actual trips")
+Rel(app, driver, "Drives", "Receives trip plans, inputs trip start and end")
+
+System(storage, "Storage system", "Usually NAS")
+Rel(busSystem, storage, "Data storage and sharing", "via shared Microsoft Access MDB files")
+@enduml

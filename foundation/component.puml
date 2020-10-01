@@ -1,0 +1,31 @@
+@startuml
+!include plantuml/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT
+
+Container(SQLite, "SQLite", "C", "stores imported data")
+Container(Access, "Microsoft Access DB", "Microsoft", "legacy store")
+Container(fastReports, "FastReports", "PDF Library", "report-generation engine")
+Container(winForms, "Winforms", "UI Library")
+
+Container_Boundary(workingHours, "Working Hours Application") {
+  Component(dataAccess, "Data Access", "F# module", "data model, db access")
+  Component(common, "Common", "Utilities for date-format conversion, etc., used everywhere")
+  Component(business, "Business", "F# module", "business calculations, domain logic")
+  Component(fastReportsDSL, "Fast Reports DSL", "F# module", "declarative wrapper around FastReports")
+  Component(UI, "UI", "F# module", "application layer, UI logic")
+  Component(UIDesign, "UI Design", "WinForms layout", "form layouts")
+}
+
+Person(User, "user")
+
+Rel(dataAccess, SQLite, "reads from/writes to")
+Rel(dataAccess, Access, "reads from/writes to")
+Rel(business, dataAccess, "gets data from/persists")
+Rel(UI, business, "triggers data processing")
+Rel(business, fastReportsDSL, "describes PDF reports")
+Rel(fastReportsDSL, fastReports, "generates PDF")
+Rel(UI, UIDesign, "uses layout")
+Rel(UIDesign, winForms, "render forms")
+Rel(User, UI, "interacts")
+@enduml
