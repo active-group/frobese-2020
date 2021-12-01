@@ -46,5 +46,20 @@ _build
 rebar3.crashdump
 
 
+.stack-work/
 
+*.aux
+*.log
+*.synctex.gz
+
+*~
+
+**/.idea/
+
+**/target/
+
+*.iml
+
+**/dist/
+**/dist-newstyle/
 
